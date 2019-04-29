@@ -1,4 +1,7 @@
 /*
+//user searches for artist
+//-jquery onclick the send button itunes.apple.com/search?artist=pearl+jam&limit=25
+//-ajax sends the request to the itunes api
 To search for content from a field in your website and display the results in your website, 
 -you must create a search field that passes a fully-qualified URL content request to the iTunes Store, 
 -parse the JavaScript Object Notation (JSON) format returned from the search, 
@@ -7,59 +10,46 @@ The fully-qualified URL must have the following format:
 https://itunes.apple.com/search?parameterkeyvalue
 Where parameterkeyvalue can be one or more parameter key and value pairs indicating the details of your query.
 */
-
-
 $(document).ready(function () {
-    document.getElementById("runButton").onclick = function () {
-        req = new XMLHttpRequest();
-        req.open("GET", "https://itunes.apple.com/search?term=jack+johnson&limit=3.", true);
-        req.send();
-        req.onload = function () {
 
-            json = JSON.parse(req.responseText);
+    $("button").on("click", function (event) {
+        event.preventDefault();
+        let searchType = "song";
+        let searchInput = $("#user-search").val();
+        let inputToUrl = searchInput.replace(" ", "+");
 
-            //for each key of results, print the key and value
-            let newRow = document.getElementById("displayRow");
-            //newRow.innerHTML = newRow.innerHTML + "<div class='row'></div>";
-            let imageOutput = document.getElementById("imageDisplay");
-            let artistOutput = document.getElementById("artistOutput");
-            let albumOutput = document.getElementById("albumOutput");
-            let trackOutput = document.getElementById("trackOutput");
-            let audioOutput = document.getElementById("audioPlayer");
+        $.ajax({
+            method: "GET",
+            url: "https://itunes.apple.com/search?entity=" + searchType + "&limit=8&term=" + inputToUrl,
+            dataType: "JSON"
+        })
 
-            json.results.forEach(function (val) {           
-                let keys = Object.keys(val);
-                keys.forEach(function (key) {
-                    if (key == "artworkUrl60") {
-                        imageOutput.innerHTML = imageOutput.innerHTML + "<img src='" + val[key] + "' " + "alt='Album Art'/>" + "<br>";
-                    } else if (key == "artistName") {
-                        artistOutput.innerHTML = artistOutput.innerHTML + "Artist -" + " " + val[key] + "<br>";
-                    } else if (key == "collectionName") {
-                        albumOutput.innerHTML = albumOutput.innerHTML + "Album -" + " " + val[key] + "<br>";
-                    } else if (key == "trackName") {
-                        trackOutput.innerHTML = trackOutput.innerHTML + "Song -" + " " + val[key] + "<br>";
-                    } else if (key == "previewUrl") {
-                        audioOutput.innerHTML = audioOutput.innerHTML + "<audio controls='controls'>" + "<source src='" + val[key] + "' type='audio/mpeg'/> </audio>"
-                    }                    
+            .done(function (data) {
+
+                console.log(data);
+                /*
+                let albumCover = data.results[0].artworkUrl100;
+                let artistName = data.results[0].artistName;
+                let songName = data.results[0].trackName;
+                let songPreview = data.results[0].previewUrl
+                */
+
+                console.log(data.results);
+
+                //$("#info-list").append(`<div class="col-2"><h3>Album Cover</h3></div><div class='col-2'><h3>Artist</h3></div><div class='col-2'><h3>Song</h3></div><div class='col-4'><h3>Album Name</h3></div><div class='col-2'><h3>Song Preview</h3></div>`);
+
+                $.each(data.results, function (key, value) {
+
+                    $("#info-list")
+                        .append(`<div class="row object-row"><div class="col-2"><img src="${value.artworkUrl100}"></div>` + "<div class='col-2'>" + value.artistName + "</div><div class='col-2'>" + value.trackName + "</div><div class='col-4'>" + value.collectionName + "</div><div class='col-2'><audio controls='controls'><source src='" + value.previewUrl + `' type="audio/mpeg"></audio></div></div>`)
                 });
+            })
+
+            .fail(function () {
+                console.log("fail");
+                $(".iTunes-seach").empty();
+                $(".iTunes-seach").append("<p>search failed, try again</p>")
             });
-        };
-    };
+
+    });
 });
-
-//create new rows for every new object you iterate though
-//let the user search anything concatting strings to the url ending
-
-/* $.ajax({
-         url: "https://itunes.apple.com/search?term=jack+johnson&limit=25.",
-         type: 'GET',
-         dataType: 'json',
-         success: function (res) {
-             $('#result').html(res)
-         }
-     });
-    */
-
- //user searches for artist
- //-jquery onclick the send button itunes.apple.com/search?artist=pearl+jam&limit=25
- //-ajax sends the request to the itunes api

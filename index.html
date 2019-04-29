@@ -2,57 +2,47 @@
 <html>
 
 <head>
-    <title>index</title>
+    <title>iTunes Seach</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         type="text/css">
     </link>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="itunessearch.css" type="text/css">
     </link>
 
 </head>
 
 <body>
-
-    <div class="container">
-        <div class="row search-bar">
-            <div class="col-2"></div>
-            <div class="col-8">
-
-                <input type="text" placeholder="Test search" id="itunesSearch" style="width:500px">
-
-                <button type="button" id="runButton">Start Test</button>
-                <div class="col-2"></div>
-
+    <div class="iTunes-search">
+        <form action="#" id="info-search">
+            <div class="search-box">
+                <input type="text" id="user-search" placeholder="Enter what you want to seach for" />
+                <!--<input id="music-note" type="submit" value="Get info" />-->
+                <button id="music-note"><i class="fab fa-itunes-note"></i></button>
+            </div>
+        </form>
+        <div class="container" id="info-list">
+            <div class="row object-row">
+                <div class="col-2">
+                    <h3>Album Cover</h3>
+                </div>
+                <div class='col-2'>
+                    <h3>Artist</h3>
+                </div>
+                <div class='col-2'>
+                    <h3>Song</h3>
+                </div>
+                <div class='col-4'>
+                    <h3>Album Name</h3>
+                </div>
+                <div class='col-2'>
+                    <h3>Song Preview</h3>
+                </div>
             </div>
         </div>
 
-        <div class="row" id="displayRow">
-
-            <div class="col-2">
-                <p id="imageDisplay"></p>
-            </div>
-            <div class="col-2">
-                <p id="artistOutput"></p>
-            </div>
-            <div class="col-2">
-                <p id="albumOutput"></p>
-            </div>
-            <div class="col-2">
-                <p id="trackOutput"></p>
-            </div>
-            <div class="col-4">
-                <p id="audioPlayer"></p>
-            </div>
-
-        </div>
-    </div>
-
-    <h4 id="itunesSearchResult">?</h4>
-    </div>
-    <p id="displayJSON"></p>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="iTunesSearch.js"></script>
+        <script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"> </script>
+        <script src="itunessearch.js"></script>
 </body>
 
 </html>

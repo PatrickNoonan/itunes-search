@@ -1,7 +1,32 @@
-.body {
-    background-color: rgb(148, 59, 59);
+html, body {
+    min-height: 100vh;
+    background: linear-gradient(90deg, #5f2c82 10%, #49a09d 90%);
+  }
+
+.search-box {
+    text-align: center;
+    margin-bottom: 50px;
 }
 
-.search-bar {
+.info-list {
+    text-align: center;
+}
+
+#user-search {
+    width: 450px;
+}
+
+.object-row {
+    margin-top: 15px;
+    word-wrap: break-word;
+    height: 100px;
+}
+
+.iTunes-search {
     margin-top: 300px;
 }
+
+#music-note {
+    width: 100px;
+  }
+  
