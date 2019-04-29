@@ -1,5 +1,4 @@
-html, body {
-    min-height: 100vh;
+body {
     background: linear-gradient(90deg, #5f2c82 10%, #49a09d 90%);
   }
 
