@@ -10,10 +10,10 @@ The fully-qualified URL must have the following format:
 https://itunes.apple.com/search?parameterkeyvalue
 Where parameterkeyvalue can be one or more parameter key and value pairs indicating the details of your query.
 */
+
 $(document).ready(function () {
 
-    $("button").on("click", function (event) {
-        event.preventDefault();
+    $("button").on("click", function () {
         let searchType = "song";
         let searchInput = $("#user-search").val();
         let inputToUrl = searchInput.replace(" ", "+");
@@ -47,7 +47,6 @@ $(document).ready(function () {
 
             .fail(function () {
                 console.log("fail");
-                $(".iTunes-seach").empty();
                 $(".iTunes-seach").append("<p>search failed, try again</p>")
             });
 
